@@ -1,34 +1,32 @@
 import React from "react";
-import { Button, Form } from "react-bootstrap";
+import styles from "./TaskListItem.module.css";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
 
-const TaskListItem = ({
-  todo,
-  handleShowEdit,
-  handleDeleteItem,
-  handleTodoComplete,
-}) => {
+const TaskListItem = ({ todo, handleShowEdit, handleTodoComplete }) => {
   return (
-    <div>
-      <li key={todo._id} className="d-flex">
-        {todo.item}{" "}
-        <Button variant="warning" onClick={() => handleShowEdit(todo._id)}>
-          Edit
-        </Button>{" "}
-        |{" "}
-        <Button variant="danger" onClick={() => handleDeleteItem(todo._id)}>
-          Delete
-        </Button>
-        <Form.Group className="mb-3 ml-3" controlId={`formid${todo._id}`}>
-          <Form.Check
-            name={`formid${todo._id}`}
-            type="checkbox"
-            label="Completed"
-            checked={todo.completed}
-            onChange={() => handleTodoComplete(todo)}
-          />
-        </Form.Group>
-      </li>
-    </div>
+    <Container className={styles.taskListItem}>
+      <Row>
+        <Col
+          sm={10}
+          style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          onClick={() => handleShowEdit(todo._id)}
+        >
+          <div key={todo._id} className="d-flex">
+            {todo.item}{" "}
+          </div>
+        </Col>
+        <Col sm={2} style={{ textAlign: "center" }}>
+          <Form.Group controlId={`formid${todo._id}`}>
+            <Form.Check
+              name={`formid${todo._id}`}
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => handleTodoComplete(todo)}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

@@ -28,11 +28,15 @@ function App() {
   return (
     <div>
       <Navbar />
-      <h1>
-        <TaskAppTitle title="My Task List" />
-      </h1>
-      <div>
-        <TaskList todoList={todoList} setTodoList={setTodoList} />
+      <div className="d-flex justify-content-center">
+        <div className="taskApp">
+          <h1>
+            <TaskAppTitle title="My Task List" />
+          </h1>
+          <div>
+            <TaskList todoList={todoList} setTodoList={setTodoList} />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -34,6 +34,7 @@ const TaskList = ({ todoList, setTodoList }) => {
         .then(function (data) {
           const newTodoList = todoList.filter((item) => item._id !== data._id);
           setTodoList(newTodoList);
+          setShowEdit(false);
         });
     }
   };
@@ -101,7 +102,7 @@ const TaskList = ({ todoList, setTodoList }) => {
   };
   return (
     <div>
-      <ul>
+      <ul style={{ paddingLeft: "0" }}>
         {todoList.map((todo) => (
           <li key={todo._id} className="d-flex">
             <TaskListItem
@@ -137,6 +138,12 @@ const TaskList = ({ todoList, setTodoList }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
+          <Button
+            variant="danger"
+            onClick={() => handleDeleteItem(todoItemEdit[0]?._id)}
+          >
+            Delete
+          </Button>
           <Button variant="secondary" onClick={handleCloseEdit}>
             Close
           </Button>
