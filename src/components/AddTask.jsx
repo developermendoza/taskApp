@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const AddTask = ({ todoItem, todoList, setTodoList, settodoItem }) => {
   const [show, setShow] = useState(false);
@@ -35,10 +36,25 @@ const AddTask = ({ todoItem, todoList, setTodoList, settodoItem }) => {
   };
 
   return (
-    <div>
-      <Button variant="primary" onClick={handleShow}>
-        Add a task
-      </Button>
+    <div
+      style={{
+        position: "fixed",
+        bottom: "0",
+        left: "0",
+        right: "0",
+        background: "white",
+        padding: "10px 0",
+      }}
+    >
+      <div style={{ textAlign: "center" }}>
+        <Button
+          variant="primary"
+          style={{ borderRadius: "50px", padding: "5px" }}
+          onClick={handleShow}
+        >
+          <AiOutlinePlus style={{ fontSize: "70px", padding: "5px 0" }} />
+        </Button>
+      </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>

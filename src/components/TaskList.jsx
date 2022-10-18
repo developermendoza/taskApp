@@ -102,7 +102,14 @@ const TaskList = ({ todoList, setTodoList }) => {
   };
   return (
     <div>
-      <ul style={{ paddingLeft: "0" }}>
+      <ul
+        style={{
+          paddingLeft: "0",
+          overflowY: "auto",
+          height: "70vh",
+          paddingTop: "20px",
+        }}
+      >
         {todoList.map((todo) => (
           <li key={todo._id} className="d-flex">
             <TaskListItem

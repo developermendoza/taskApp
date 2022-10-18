@@ -7,15 +7,24 @@ const TaskListItem = ({ todo, handleShowEdit, handleTodoComplete }) => {
     <Container className={styles.taskListItem}>
       <Row>
         <Col
-          sm={10}
-          style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          xs={10}
+          className={styles.taskListItemName}
+          style={{ display: "flex", alignItems: "center" }}
           onClick={() => handleShowEdit(todo._id)}
         >
-          <div key={todo._id} className="d-flex">
+          <div
+            key={todo._id}
+            style={{
+              textDecoration: todo.completed && "line-through",
+              color: todo.completed && "#e2e2e2",
+              fontWeight: "700",
+            }}
+            className="d-flex"
+          >
             {todo.item}{" "}
           </div>
         </Col>
-        <Col sm={2} style={{ textAlign: "center" }}>
+        <Col xs={2} style={{ textAlign: "center" }}>
           <Form.Group controlId={`formid${todo._id}`}>
             <Form.Check
               name={`formid${todo._id}`}
