@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import nextId from "react-id-generator";
+
+import AddTask from "./components/AddTask";
+import TaskAppTitle from "./components/TaskAppTitle";
+import TaskList from "./components/TaskList";
+import TaskListItem from "./components/TaskListItem";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -37,124 +41,125 @@ function App() {
       .finally(() => console.log("end loading here"));
   }, []);
 
-  const handleOnChange = (e) => {
-    const { value } = e.target;
-    settodoItem(value);
-  };
+  // const handleOnChange = (e) => {
+  //   const { value } = e.target;
+  //   settodoItem(value);
+  // };
 
-  const handleTodoComplete = (task) => {
-    const isTaskCompleted = !task.completed;
-    // console.log("test", id);
-    // console.log("isTaskCompleted", isTaskCompleted);
-    fetch("http://localhost:8080/updateTodo", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: task._id,
-        item: task.item,
-        completed: isTaskCompleted,
-      }),
-    })
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        const newList = todoList.map((obj) => {
-          if (obj._id === data._id) {
-            return { ...obj, completed: isTaskCompleted };
-          }
-          return obj;
-        });
-        setTodoList(newList);
-      });
-  };
+  // const handleTodoComplete = (task) => {
+  //   const isTaskCompleted = !task.completed;
+  //   fetch("http://localhost:8080/updateTodo", {
+  //     method: "PATCH",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       id: task._id,
+  //       item: task.item,
+  //       completed: isTaskCompleted,
+  //     }),
+  //   })
+  //     .then(function (res) {
+  //       return res.json();
+  //     })
+  //     .then(function (data) {
+  //       console.log(data);
+  //       const newList = todoList.map((obj) => {
+  //         if (obj._id === data._id) {
+  //           return { ...obj, completed: isTaskCompleted };
+  //         }
+  //         return obj;
+  //       });
+  //       setTodoList(newList);
+  //     });
+  // };
 
-  const handleDeleteItem = (id) => {
-    if (id !== "") {
-      fetch("http://localhost:8080/deleteTodo", {
-        method: "delete",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id,
-        }),
-      })
-        .then(function (res) {
-          return res.json();
-        })
-        .then(function (data) {
-          const newTodoList = todoList.filter((item) => item._id !== data._id);
-          setTodoList(newTodoList);
-        });
-    }
-  };
+  // const handleDeleteItem = (id) => {
+  //   if (id !== "") {
+  //     fetch("http://localhost:8080/deleteTodo", {
+  //       method: "delete",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         id,
+  //       }),
+  //     })
+  //       .then(function (res) {
+  //         return res.json();
+  //       })
+  //       .then(function (data) {
+  //         const newTodoList = todoList.filter((item) => item._id !== data._id);
+  //         setTodoList(newTodoList);
+  //       });
+  //   }
+  // };
 
-  const handleShowEdit = (id) => {
-    setShowEdit(true);
-    console.log(id);
-    const editItem = todoList.filter((todo) => todo._id === id);
-    console.log(editItem);
-    settodoItemEdit(editItem);
-  };
+  // const handleShowEdit = (id) => {
+  //   setShowEdit(true);
+  //   console.log(id);
+  //   const editItem = todoList.filter((todo) => todo._id === id);
+  //   console.log(editItem);
+  //   settodoItemEdit(editItem);
+  // };
 
-  const handleOnChangeEdit = (e) => {
-    setEditItem(e.target.value);
-  };
+  // const handleOnChangeEdit = (e) => {
+  //   setEditItem(e.target.value);
+  // };
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
+  // const handleOnSubmit = (e) => {
+  //   e.preventDefault();
 
-    if (todoItem !== "") {
-      fetch("http://localhost:8080/addTodo", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          todoItem,
-        }),
-      })
-        .then(function (res) {
-          return res.json();
-        })
-        .then(function (data) {
-          setTodoList([data, ...todoList]);
-          settodoItem("");
-          handleClose();
-        });
-    }
-  };
-  const handleOnSubmitEdit = (e) => {
-    e.preventDefault();
-    fetch("http://localhost:8080/updateTodo", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: todoItemEdit[0]._id,
-        item: editItem,
-      }),
-    })
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        const newList = todoList.map((obj) => {
-          if (obj._id === data._id) {
-            return { ...obj, item: editItem };
-          }
-          return obj;
-        });
-        setTodoList(newList);
-        settodoItemEdit("");
-        setEditItem("");
-        handleCloseEdit();
-      });
-  };
+  //   if (todoItem !== "") {
+  //     fetch("http://localhost:8080/addTodo", {
+  //       method: "post",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         todoItem,
+  //       }),
+  //     })
+  //       .then(function (res) {
+  //         return res.json();
+  //       })
+  //       .then(function (data) {
+  //         setTodoList([data, ...todoList]);
+  //         settodoItem("");
+  //         handleClose();
+  //       });
+  //   }
+  // };
+  // const handleOnSubmitEdit = (e) => {
+  //   e.preventDefault();
+  //   fetch("http://localhost:8080/updateTodo", {
+  //     method: "PATCH",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       id: todoItemEdit[0]._id,
+  //       item: editItem,
+  //     }),
+  //   })
+  //     .then(function (res) {
+  //       return res.json();
+  //     })
+  //     .then(function (data) {
+  //       const newList = todoList.map((obj) => {
+  //         if (obj._id === data._id) {
+  //           return { ...obj, item: editItem };
+  //         }
+  //         return obj;
+  //       });
+  //       setTodoList(newList);
+  //       settodoItemEdit("");
+  //       setEditItem("");
+  //       handleCloseEdit();
+  //     });
+  // };
   console.log("todoList: ", todoList);
   return (
     <div className="App">
-      <h1>To Do Web App</h1>
+      {/* <TaskList /> */}
+      <h1>
+        <TaskAppTitle title="My Task List" />
+      </h1>
       <div>
-        <h2>My To Do List</h2>
-        <ul>
+        <TaskList todoList={todoList} setTodoList={setTodoList} />
+        {/* <ul>
           {todoList.map((todo) => (
             <li key={todo._id} className="d-flex">
               {todo.item}{" "}
@@ -182,13 +187,13 @@ function App() {
               </Form.Group>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
-      <Button variant="primary" onClick={handleShow}>
+      {/* <Button variant="primary" onClick={handleShow}>
         Add a task
-      </Button>
+      </Button> */}
 
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
@@ -211,9 +216,9 @@ function App() {
             Save To Do
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
 
-      <Modal show={showEdit} onHide={handleCloseEdit}>
+      {/* <Modal show={showEdit} onHide={handleCloseEdit}>
         <Modal.Header closeButton>
           <Modal.Title>Edit List Item</Modal.Title>
         </Modal.Header>
@@ -237,7 +242,7 @@ function App() {
             Save To Do
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

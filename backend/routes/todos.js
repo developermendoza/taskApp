@@ -22,11 +22,17 @@ const deleteTodo = async (req, res) => {
 const updateTodo = async (req, res) => {
   try {
     const { id, item, completed } = req.body;
-    const data = await Todo.findByIdAndUpdate(id, {
-      item,
-      completed,
-      updatedAt: new Date(),
-    });
+    console.log("completed: ", completed);
+    const data = await Todo.findByIdAndUpdate(
+      id,
+      {
+        item,
+        completed,
+        updatedAt: new Date(),
+      },
+      { new: true }
+    );
+    console.log("new data: ", data);
     res.send(data);
   } catch (error) {
     console.log("error: ", error);
